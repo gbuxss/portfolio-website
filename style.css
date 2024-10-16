@@ -554,3 +554,49 @@ body.dark-mode {
 .dark-mode .contact-info-container a:hover {
   color: #bbbbbb;
 }
+
+/* General styles for the custom link */
+.custom-link {
+    color: black !important; /* Default color for light mode */
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.custom-link:hover, .custom-link:focus {
+    text-decoration: underline !important;
+}
+
+/* Dark mode styles */
+.dark-mode .custom-link {
+    color: white !important;
+}
+
+/* Button-specific styles */
+.btn.custom-link {
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 2rem;
+    border: rgb(53, 53, 53) 0.1rem solid;
+    font-weight: 600;
+    transition: all 300ms ease;
+    width: 8rem;
+}
+
+.btn.btn-color-2.custom-link {
+    background: none;
+}
+
+.btn.btn-color-2.custom-link:hover {
+    border: rgb(255, 255, 255) 0.1rem solid;
+}
+
+/* Dark mode button styles */
+.dark-mode .btn.btn-color-2.custom-link {
+    border-color: #ffffff;
+    color: #ffffff !important;
+}
+
+.dark-mode .btn.btn-color-2.custom-link:hover {
+    background-color: #ffffff;
+    color: #121212 !important;
+}
