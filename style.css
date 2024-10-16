@@ -555,3 +555,31 @@ body.dark-mode {
 .dark-mode .contact-info-container a:hover {
   color: #bbbbbb;
 }
+
+#mobile-dark-mode-toggle {
+  background: balck;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.dark-mode #mobile-dark-mode-toggle {
+  border-color: white;
+  color: black;
+}
+
+#mobile-dark-mode-toggle:hover {
+  cursor: pointer;
+}
+
+/* Ensure the background is pure white when clicked in dark mode */
+.dark-mode #mobile-dark-mode-toggle:hover,
+.dark-mode #mobile-dark-mode-toggle:active {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Light mode hover effect */
+#mobile-dark-mode-toggle:hover {
+  background-color: rgb(53, 53, 53);
+  color: white;
+}
