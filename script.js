@@ -1,3 +1,16 @@
+// Add this to the top of your script.js file
+window.onload = function() {
+  // Scroll to top
+  window.scrollTo(0, 0);
+  
+  // For older browsers, add this as a fallback
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+
+  // Apply dark mode if it was active before refresh
+  applyDarkModeIfSaved();
+}
+
 function toggleMenu() {
   const menu = document.querySelector(".menu-links");
   const icon = document.querySelector(".hamburger-icon");
@@ -11,35 +24,19 @@ const body = document.body;
 const nav = document.querySelector('nav');
 const footer = document.querySelector('footer');
 
-darkModeToggle.addEventListener("click", function() {
+function toggleDarkMode() {
   body.classList.toggle("dark-mode");
   nav.classList.toggle("dark-mode");
   footer.classList.toggle("dark-mode");
 
   // Toggle class for all relevant elements
-  document.querySelectorAll('a').forEach(link => {
-    link.classList.toggle('dark-mode');
-  });
-
-  document.querySelectorAll('.btn').forEach(button => {
-    button.classList.toggle('dark-mode');
-  });
-
-  document.querySelectorAll('.details-container').forEach(container => {
-    container.classList.toggle('dark-mode');
-  });
-
-  document.querySelectorAll('p, h1, h2, h3').forEach(text => {
-    text.classList.toggle('dark-mode');
+  document.querySelectorAll('a, .btn, .details-container, p, h1, h2, h3').forEach(element => {
+    element.classList.toggle('dark-mode');
   });
 
   // Specifically handle icons
   document.querySelectorAll('.icon').forEach(icon => {
-    if (body.classList.contains("dark-mode")) {
-      icon.style.filter = "invert(1) brightness(100%)";
-    } else {
-      icon.style.filter = "none";
-    }
+    icon.style.filter = body.classList.contains("dark-mode") ? "invert(1) brightness(100%)" : "none";
   });
 
   // Handle contact info container
@@ -47,16 +44,17 @@ darkModeToggle.addEventListener("click", function() {
     container.classList.toggle('dark-mode');
   });
 
-  // Footer and nav specific inversion for text color
-  document.querySelectorAll('footer a, nav a').forEach(link => {
-    link.classList.toggle('dark-mode');
-  });
-
   // Update button text
   darkModeToggle.textContent = body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
 
-  // Update contact info container styles
-  document.querySelectorAll('.contact-info-container a').forEach(link => {
-    link.classList.toggle('dark-mode');
-  });
-});
+  // Save dark mode preference
+  localStorage.setItem('darkMode', body.classList.contains("dark-mode"));
+}
+
+function applyDarkModeIfSaved() {
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDarkMode();
+  }
+}
+
+darkModeToggle.addEventListener("click", toggleDarkMode);
