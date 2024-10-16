@@ -106,11 +106,3 @@
     text-align: justify;
   }
 }
-
-/* Mobile-specific styles */
-@media screen and (max-width: 768px) {
-    #downloadCV {
-        color: inherit !important; /* Use !important to override browser defaults */
-        -webkit-text-fill-color: inherit; /* For WebKit browsers */
-    }
-}
