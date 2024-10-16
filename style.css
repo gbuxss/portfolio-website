@@ -554,3 +554,13 @@ body.dark-mode {
 .dark-mode .contact-info-container a:hover {
   color: #bbbbbb;
 }
+
+/* Update the color for the download CV link */
+#downloadCV {
+    color: inherit; /* This will make it inherit the color from its parent */
+    text-decoration: none; /* Remove the default underline */
+}
+
+#downloadCV:hover {
+    text-decoration: underline; /* Add underline on hover for better UX */
+}
