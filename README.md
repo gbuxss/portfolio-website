@@ -32,7 +32,7 @@ The project consists of the following main files:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/portfolio-website.git
+   git clone https://github.com/gbuxss/portfolio-website.git
    ```
 2. Navigate to the project directory:
    ```
