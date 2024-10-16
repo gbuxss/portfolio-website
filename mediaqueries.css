@@ -106,16 +106,3 @@
     text-align: justify;
   }
 }
-
-/* Mobile-specific styles */
-@media screen and (max-width: 768px) {
-    .custom-link, .btn.custom-link {
-        color: black !important; /* Force black color for light mode */
-        -webkit-text-fill-color: black !important; /* For WebKit browsers */
-    }
-
-    .dark-mode .custom-link, .dark-mode .btn.custom-link {
-        color: white !important; /* Force white color for dark mode */
-        -webkit-text-fill-color: white !important; /* For WebKit browsers */
-    }
-}
