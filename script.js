@@ -11,6 +11,20 @@ window.onload = function() {
   applyDarkModeIfSaved();
 }
 
+// Add this function to handle scroll restoration
+function handleScrollRestoration() {
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+}
+
+// Call this function when the page starts to unload
+window.addEventListener('beforeunload', handleScrollRestoration);
+
+// Also call it when the page has loaded
+window.addEventListener('load', handleScrollRestoration);
+
 function toggleMenu() {
   const menu = document.querySelector(".menu-links");
   const icon = document.querySelector(".hamburger-icon");
@@ -18,43 +32,68 @@ function toggleMenu() {
   icon.classList.toggle("open");
 }
 
-// Dark Mode Toggle Function
-const darkModeToggle = document.getElementById("dark-mode-toggle");
+// Existing desktop dark mode toggle
+const desktopDarkModeToggle = document.getElementById("dark-mode-toggle");
+// New mobile dark mode toggle
+const mobileDarkModeToggle = document.getElementById("mobile-dark-mode-toggle");
 const body = document.body;
-const nav = document.querySelector('nav');
-const footer = document.querySelector('footer');
 
+// Function to toggle dark mode
 function toggleDarkMode() {
-  body.classList.toggle("dark-mode");
-  nav.classList.toggle("dark-mode");
-  footer.classList.toggle("dark-mode");
-
-  // Toggle class for all relevant elements
-  document.querySelectorAll('a, .btn, .details-container, p, h1, h2, h3').forEach(element => {
-    element.classList.toggle('dark-mode');
-  });
-
-  // Specifically handle icons
-  document.querySelectorAll('.icon').forEach(icon => {
-    icon.style.filter = body.classList.contains("dark-mode") ? "invert(1) brightness(100%)" : "none";
-  });
-
-  // Handle contact info container
-  document.querySelectorAll('.contact-info-upper-container, .contact-info-container').forEach(container => {
-    container.classList.toggle('dark-mode');
-  });
-
-  // Update button text
-  darkModeToggle.textContent = body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
-
-  // Save dark mode preference
-  localStorage.setItem('darkMode', body.classList.contains("dark-mode"));
+    body.classList.toggle("dark-mode");
+    
+    // Toggle dark mode for specific elements
+    document.querySelectorAll('nav, footer, a, .btn, .details-container, p, h1, h2, h3, .contact-info-upper-container, .contact-info-container')
+        .forEach(element => element.classList.toggle('dark-mode'));
+    
+    // Handle icons
+    document.querySelectorAll('.icon').forEach(icon => {
+        icon.style.filter = body.classList.contains("dark-mode") ? "invert(1) brightness(100%)" : "none";
+    });
+    
+    // Update button text for both toggles
+    const buttonText = body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
+    desktopDarkModeToggle.textContent = buttonText;
+    mobileDarkModeToggle.textContent = buttonText;
+    
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', body.classList.contains("dark-mode"));
 }
 
+// Function to apply saved dark mode preference
 function applyDarkModeIfSaved() {
-  if (localStorage.getItem('darkMode') === 'true') {
-    toggleDarkMode();
-  }
+    if (localStorage.getItem('darkMode') === 'true') {
+        if (!body.classList.contains("dark-mode")) {
+            toggleDarkMode();
+        }
+    } else {
+        if (body.classList.contains("dark-mode")) {
+            toggleDarkMode();
+        }
+    }
 }
 
-darkModeToggle.addEventListener("click", toggleDarkMode);
+// Keep existing desktop event listener
+desktopDarkModeToggle.addEventListener("click", toggleDarkMode);
+
+// Add event listener for mobile toggle
+mobileDarkModeToggle.addEventListener("click", toggleDarkMode);
+
+// Apply saved dark mode preference on page load
+window.addEventListener('load', () => {
+    applyDarkModeIfSaved();
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+});
+
+// Handle scroll restoration
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+});
