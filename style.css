@@ -563,7 +563,7 @@ body.dark-mode {
 }
 
 .custom-link:hover, .custom-link:focus {
-    text-decoration: underline !important;
+    text-decoration: none !important; /* Remove underline on hover */
 }
 
 /* Dark mode styles */
@@ -574,12 +574,12 @@ body.dark-mode {
 /* Button-specific styles */
 .btn.custom-link {
     display: inline-block;
-    padding: 1rem;
+    padding: 1rem; /* Reverted to original padding */
     border-radius: 2rem;
     border: rgb(53, 53, 53) 0.1rem solid;
     font-weight: 600;
     transition: all 300ms ease;
-    width: 8rem;
+    width: 8rem; /* Reverted to original fixed width */
 }
 
 .btn.btn-color-2.custom-link {
