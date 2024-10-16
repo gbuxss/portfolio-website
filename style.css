@@ -247,6 +247,7 @@ section {
 
 .btn-color-2 {
   background: none;
+  color: inherit;
 }
 
 .btn-color-2:hover {
